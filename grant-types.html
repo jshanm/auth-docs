@@ -1,0 +1,663 @@
+<html lang="en">
+<head>
+	<title>Dispatcher - Documentation</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="Dispatcher documentation for client teams">
+    <meta name="author" content="Jay Shan">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+	<script src="https://cdn.rawgit.com/blowsie/Pure-JavaScript-HTML5-Parser/master/htmlparser.js"></script>
+
+	<script src="https://unpkg.com/lunr/lunr.js"></script>
+	<script src="assets/js/search.js"></script>
+</head>
+
+<body class="docs-page">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+					<button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible mr-2 d-xl-none" type="button">
+	                    <span></span>
+	                    <span></span>
+	                    <span></span>
+	                </button>
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon mr-2" src="assets/images/ebsco-logo.svg" alt="logo"><span class="logo-text">Auth<span class="text-alt">Docs</span></span></a></div>
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+	                <div class="top-search-box d-none d-lg-flex">
+		                `<form class="search-form">
+				            <input id="search-input" type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+				            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+							<section id="search-results" class="search"></section>
+				        </form>`
+	                </div>
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="https://github.com/EBSCOIS/resourcemanagement.shared.dispatcher"><i class="fab fa-github fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+
+    <div class="docs-wrapper">
+	    <div id="docs-sidebar" class="docs-sidebar">
+		    <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+            </div>
+		    <nav id="docs-nav" class="docs-nav navbar">
+			    <ul class="section-items list-unstyled nav flex-column pb-3">
+					<li class="nav-item section-title"><a class="nav-link scrollto active" href="#grant-type-selection"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Grant Type Selection</a></li>
+					<li class="nav-item section-title"><a class="nav-link scrollto" href="#grant-types"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Grant Types</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-client_creds">Client Credentials</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-trusted-app">Trusted Application</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-auth-code">Authorization Code</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-pkce">PKCE</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-auth-code">Refresh Token</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-auth-code">Introspection</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-auth-code">Revocation</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#gr-ty-auth-code">External clients</a></li>
+					<li class="nav-item"><a class="nav-link scrollto" href="#scopes">Scopes</a></li>
+					<li class="nav-item section-title"><a class="nav-link scrollto" href="#grant-types"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>JWK endpoint</a></li>
+					<li class="nav-item section-title"><a class="nav-link scrollto" href="#grant-types"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Configuration</a></li>
+			    </ul>
+
+		    </nav><!--//docs-nav-->
+	    </div><!--//docs-sidebar-->
+	    <div class="docs-content">
+		    <div class="container">
+
+				<article class="docs-article" id="#grant-type-selection">
+					<header class="docs-header">
+						<h1 class="docs-heading">Grant Type Selection</h1>
+						<section class="docs-intro">
+							<p>According to the OAuth2 specification the grant selection for securing an API using OAuth2 can be taken based on the requirements for end user identification, client type (server side web application, native application, client side web application) and the level of trust the resource owner would have on the client application:</p>
+							<br>
+							<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-05-23T22:22:21.211Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36\&quot; etag=\&quot;W4bWpEXXCragcM9vEpzN\&quot; version=\&quot;13.1.3\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;C5RBs43oDa-KdzZeNtuy\&quot; name=\&quot;Page-1\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+							<script type="text/javascript" src="https://app.diagrams.net/js/viewer.min.js"></script>
+						</section><!--//docs-intro-->
+					</header>
+				</article><!--//docs-article-->
+				<article class="docs-article" id="#grant-types">
+					<header class="docs-header">
+						<h1 class="docs-heading">Grant Types</h1>
+						<section class="docs-intro">
+							<p>Here is the list of grant types that dispatcher currently supports.</p>
+						</section>
+						<section class="docs-section" id="gr-ty-client_creds">
+							<h2 class="section-heading">Client Credentials</h2>
+							<p>The Client Credentials Grant (defined in RFC 6749, section 4.4) allows an application to request an Access Token using its Client Id and Client Secret. It is used for non interactive applications (a CLI, a daemon, or a Service running on your backend) where the token is issued to the application itself, instead of an end user.</p>
+							<p>Needs client_id and client_secret to use this grant_type</p>
+							<h5>Example:</h5>
+							<figure>
+							<pre>
+								<code>POST /api/dispatcher/oauth/token HTTP/2.0
+Host: auth.ebsco.zone
+Authorization: Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=
+Content-Type: application/x-www-form-urlencoded
+grant_type=client_credentials
+								</code>
+							</pre>
+							</figure>
+							<h5 id = "gr-ty-client_creds-req">Request Body</h5>
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">grant_type</a></th>
+										<td><i>client_credentials</i></td>
+										<td>Mandatory. Identifies the grant type being used in the token endpoint</td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">scope</a></th>
+										<td><b>example: </b>read:userInfo</td>
+										<td><p>Optional. If you wanted only specific claims to be present in the access token, you can request for appropriate scope in the request. If scope not passed, it will return all the allowed scopes for the client by default.</p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<h5 id = "gr-ty-client_creds-res">Response</h5>
+							<div class="table-responsive my-4">
+								//TODO
+							</div>
+						</section><!--//section-->
+						<section class="docs-section" id="gr-ty-trusted-app">
+							<h2 class="section-heading">Trusted Application</h2>
+							<p>Trusted application is a grant type used by any EBSCO internal application which wants to handle to authentication itself, but needs a token generated by Dispatcher.</p>
+							<h5>Below are the conditions of a client to use the <i>trusted_application</i> grant type</h5>
+							<ol>
+								<li>Should be an EBSCO internal application</li>
+								<li>Should be registered client to Dispatcher</li>
+							</ol>
+							<p>Needs client_id and client_secret to use this grant_type</p>
+							<h5>Example:</h5>
+							<figure>
+							<pre>
+								<code>POST /api/dispatcher/oauth/token HTTP/2.0
+Host: auth.ebsco.zone
+Authorization: Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=
+Content-Type: application/json
+grant_type=trusted_application
+auth_context={"CustID": "ns12345","ProfID": "ehost", "GroupID": "main", "isDefault": false,"UniqueUserId": "9808128", "AuthMethod": "uid", "RefURL": "RefURL", "affiliationStatus": "Authorized", "custName": "EBSCO UNIV", "custType": "S","customerStatus": "a","Client IP": "10.10.10.10"}
+								</code>
+							</pre>
+							</figure>
+							<h5>Request Body</h5>
+							<div class="table-responsive my-4">
+								<table class="table table-bordered">
+									<tbody>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">grant_type</a></th>
+										<td><i>trusted_application</i></td>
+										<td>Identifies the grant type being used in the token endpoint</td>
+									</tr>
+									<tr>
+										<th class="theme-bg-light"><a class="theme-link" href="#">auth_context</a></th>
+										<td><i><b>example:</b> {"CustID": "ns12345","ProfID": "ehost", "GroupID": "main", "isDefault": false,"UniqueUserId": "9808128", "AuthMethod": "uid", "RefURL": "RefURL", "affiliationStatus": "Authorized", "custName": "EBSCO UNIV", "custType": "S","customerStatus": "a","Client IP": "10.10.10.10"}</i></td>
+										<td><p>Should be in this JSON format. This example will provide an Institutional tokens to the client application.</p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<h5>Response</h5>
+							<div class="table-responsive my-4">
+								//TODO
+							</div>
+							<div class="callout-block callout-block-info">
+								<div class="content">
+									<h4 class="callout-title">
+	                                <span class="callout-icon-holder mr-1">
+		                                <i class="fas fa-info-circle"></i>
+		                            </span><!--//icon-holder-->
+										Personal User Tokens
+									</h4>
+									<p>If you wanted to generate a personal user JWT tokens, you can add <i><b>uniqueUserId</b></i> as one of the other element in the json. It represents the <b>valid puaId</b> of the personaluser.</p>
+									<p> Dispatcher will call backend PUA Services to get the user information needed to generate the <i>id_token.</i></p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+
+							<div class="callout-block callout-block-warning">
+								<div class="content">
+									<h4 class="callout-title">
+	                                <span class="callout-icon-holder mr-1">
+		                                <i class="fas fa-bullhorn"></i>
+		                            </span><!--//icon-holder-->
+										Institutional Tokens
+									</h4>
+									<p>Dispatcher will not check the validity of the custId, groupId and profileId. It will just generate the token with the institutional context passed in the <i>auth_context</i></p>
+								</div><!--//content-->
+							</div><!--//callout-block-->
+						</section><!--//section-->
+						<section class="docs-section" id="gr-ty-auth-code">
+							<h2 class="section-heading">Authorization Code</h2>
+							<p>The Authorization Code grant type is used by confidential and public clients to exchange an authorization code for an access token.</p>
+							<p>After the user returns to the client via the redirect URL, the application will get the authorization code from the URL and use it to request an access token.</p>
+							<p>Currently dispatcher supports two levels of authentication through auth_code grant flow.
+								Institutional Authentication and personal user </p>
+							<ul>
+								<li><strong class="mr-1">Institutional authentication</strong></li>
+								<li><strong class="mr-1">Personal User authentication</strong></li>
+							</ul>
+							<h3>/authorize request</h3>
+							<h5>Example:</h5>
+							<figure>
+							<pre>
+								<code>GET /api/dispatcher/authorize HTTP/2.0
+Host: auth.ebsco.zone
+response_type=code
+&scope=openid%20profile%20email
+&client_id=xxxxxxxx
+&state=xxxxxxxx
+&acr_values=uid ip
+&redirect_uri=https%3A%2F%2Fclient.example.org%2Fcallback
+								</code>
+							</pre>
+							</figure>
+							<h5>Request:</h5>
+							<div class="table-responsive my-4">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th scope="col">Param Name</th>
+										<th scope="col">Type</th>
+										<th scope="col">Required</th>
+										<th scope="col">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">client_id</th>
+										<td>String</td>
+										<td>Yes</td>
+										<td><p>OAuth 2.0 Client Identifier valid at the Authorization Server.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">redirect_uri</th>
+										<td>String</td>
+										<td>No</td>
+										<td>
+											<p>The URL to which Dispatcher will redirect the browser after authorization has been granted by the user. The Authorization Code will be available in the <b><i>code</i></b> URL parameter.</p>
+											<div class="callout-block callout-block-info">
+												<div class="content">
+													<h4 class="callout-title">
+												<span class="callout-icon-holder mr-1">
+													<i class="fas fa-info-circle"></i>
+												</span><!--//icon-holder-->
+														default redirect_uri
+													</h4>
+													<p>A client which has only one redirect uri registered would not be required to provide a value for this parameter. The auth code would be automatically send to the this registered redirect uri.</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">scope</th>
+										<td>String</td>
+										<td>No</td>
+										<td>
+											<p>The scopes which you want to request authorization for. These must be separated by a space. You can request any of the standard OpenID Connect (OIDC) scopes about users, such as profile and email. See //TODO scopes for more details.</p>
+											<p>If not passed in the request, all the allowed scopes for the client will be applied.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">response_type</th>
+										<td>String</td>
+										<td>Yes</td>
+										<td><p>OAuth 2.0 Response Type value that determines the authorization processing flow to be used, including what parameters are returned from the endpoints used. When using the Authorization Code Flow, this value is <b><i>code</i></b></p></td>
+									</tr>
+									<tr>
+										<th scope="row">response_mode</th>
+										<td>String</td>
+										<td>Yes</td>
+										<td><p>This should always be <b><i>query</i></b></p></td>
+									</tr>
+									<tr>
+										<th scope="row">state</th>
+										<td>String</td>
+										<td>No</td>
+										<td><p>If an action is desired post-redirect the receiving service can use the state value for a decision path.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">acr_values</th>
+										<td>String</td>
+										<td>No</td>
+										<td>
+											<p>Space separated <i>Authentication Context Class Reference values</i>. We will use this context to pass our AuthTypes to the IDPs (currently, either Webauth or Auth0). No special characters allowed except underscore.</p>
+											<div class="callout-block callout-block-info">
+												<div class="content">
+													<h4 class="callout-title">
+												<span class="callout-icon-holder mr-1">
+													<i class="fas fa-info-circle"></i>
+												</span><!--//icon-holder-->
+														supported acr_values
+													</h4>
+													<p>If you pass one and only <i>auth0</i>, the dispatcher will utilize Auth0 to authenticate the user. Anything else, the user would be redirected to webuauth login. See docs //TODO </p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">login_hint</th>
+										<td>String</td>
+										<td>No</td>
+										<td><p>If a login hint is provided, it should always be in the form of <i>hintKey1:hintValue1, hintKey2:hintValue2, ...</i>.Please see here//TODO for login_hint processing. Please see //TODO here for allowed login hints  </p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<h3>/token request</h3>
+							<h5>Example:</h5>
+							<figure>
+							<pre>
+								<code>POST /api/dispatcher/oauth/token HTTP/2.0
+Host: auth.ebsco.zone
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=
+grant_type=authorization_code
+&code=sdv5G
+&redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+								</code>
+							</pre>
+							</figure>
+						</section><!--//section-->
+						<section class="docs-section" id="gr-ty-pkce">
+							<h2 class="section-heading">Authorization Code with Proof Key for Code Exchange (PKCE) </h2>
+							<p>The Proof Key for Code Exchange extension describes a technique for public clients to mitigate the threat of having the authorization code intercepted. This involves the client first creating a secret, and then using that secret again when exchanging the authorization code for an access token. This way if the code is intercepted, it will not be useful since the token request relies on the initial secret.</p>
+							<p>The PKCE-enhanced Authorization Code Flow introduces a secret created by the calling application that can be verified by the authorization server; this secret is called the Code Verifier. Additionally, the calling app creates a transform value of the Code Verifier called the Code Challenge and sends this value over HTTPS to retrieve an Authorization Code. This way, a malicious attacker can only intercept the Authorization Code, and they cannot exchange it for a token without the Code Verifier.</p>
+							<p>The spec can be found <a href="https://tools.ietf.org/html/rfc7636">here</a></p>
+							<h3>/authorize request</h3>
+							<h5>Example:</h5>
+							<figure>
+							<pre>
+								<code>GET /authorize?
+    response_type=code
+    &scope=openid%20profile%20email
+    &code_challenge=CODE_CHALLENGE
+    & code_challenge_method=S256&
+    &client_id=xxxxxxxx
+    &state=xxxxxxxx
+    &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb HTTP/2.0
+Host: auth.ebsco.zone
+								</code>
+							</pre>
+							</figure>
+							<h5>Request:</h5>
+							<p>This flow is same as Authorization Code Grant Flow with two additional parameters code_challenge and code_challenge_method.</p>
+							<div class="table-responsive my-4">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th scope="col">Param Name</th>
+										<th scope="col">Type</th>
+										<th scope="col">Required</th>
+										<th scope="col">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">code_challenge</th>
+										<td>String</td>
+										<td>Yes</td>
+										<td><p>The product of the code_verifier and the code_challenge_method. Must be the product of the SHA256 + BASE64URL encode, as specified in section 4.2 of the RFC.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">code_challenge_method</th>
+										<td>String</td>
+										<td>Yes</td>
+										<td><p>Method used to generate the challenge (e.g., S256). The PKCE spec defines two methods, S256 and plain, the former is used in this example and is the only one supported by Auth0 since the latter is discouraged.</p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<h3>/token request</h3>
+							<p>The following serialized form parameters must be provided in the request</p>
+							<div class="table-responsive my-4">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th scope="col">Name</th>
+										<th scope="col">Type</th>
+										<th scope="col">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">grant_type</th>
+										<td>String</td>
+										<td><p>This must be set to authorization_code.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">code</th>
+										<td>String</td>
+										<td><p>The authorization code received in response to the authentication request.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">code_verifier</th>
+										<td>String</td>
+										<td>
+											<p>A cryptographic string of sufficient entropy such that an attacker cannot predict or guess its value, as specified in section 4.1 of the RFC(https://tools.ietf.org/html/rfc7636). This value is used with the code_challenge_method presented in the /authorize request, to produce the value to check against the code_challenge, which is also presented at /authorize.</p>
+											<div class="callout-block callout-block-info">
+												<div class="content">
+													<h4 class="callout-title">
+												<span class="callout-icon-holder mr-1">
+													<i class="fas fa-info-circle"></i>
+												</span><!--//icon-holder-->
+														supported algorithms
+													</h4>
+													<p>Currently dispatcher supports only S256</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">redirect_uri</th>
+										<td>String</td>
+										<td><p>The redirectURI supplied in the original authentication request.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">client_id</th>
+										<td>String</td>
+										<td><p>The relying party client identifier.</p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<figure>
+								<pre>
+									<code>POST /api/dispatcher/oauth/token HTTP/2.0
+Host: auth.ebsco.zone
+Content-Type: application/x-www-form-urlencoded
+grant_type=authorization_code
+client_id=A_CLIENT_ID
+&code=SplxlOBeZQQYbYS6WxSbIA
+&code_verifier=YOUR_GENERATED_CODE_VERIFIER
+&redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+									</code>
+								</pre>
+							</figure>
+						</section><!--//section-->
+						<section class="docs-section" id="scopes">
+							<h2 class="section-heading">Scopes</h2>
+							<p>Scopes let you specify exactly what type of access you need as a client. Scopes limit access for OAuth tokens. They do not grant any additional permission beyond that which the user already has.</p>
+							<p>Supported Scopes</p>
+							<div class="table-responsive my-4">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th scope="col">Scope</th>
+										<th scope="col">Type</th>
+										<th scope="col">Description</th>
+										<th scope="col">Claim available in </th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">openid</th>
+										<th scope="row">OpenId standard</th>
+										<td>Optional. Indicates that the application intends to use OpenID to verify the user's identity. If not present, Dispatcher automatically assumes that this is an openid request.</td>
+										<td>N/A</td>
+									</tr>
+									<tr>
+										<th scope="row">profile</th>
+										<th scope="row">OpenId standard</th>
+										<td>This refers to user profile information of the user, such as user's name, profile picture etc.</td>
+										<td>ID token</td>
+									</tr>
+									<tr>
+										<th scope="row">email</th>
+										<th scope="row">OpenId standard</th>
+										<td>This includes user's email information in the token</td>
+										<td>Access token</td>
+									</tr>
+									<tr>
+										<th scope="row">affiliation</th>
+										<th scope="row">EBSCO standard</th>
+										<td>
+											<p> Array claim</p>
+											<p> For institutional authentication, the affiliation claim would be added to the token that represents custId and groupId of the institution to which the user authenticated.</p>
+											<p> For personal user authentication, the access token will include the institutions that the user is affiliated and authorized.</p>
+										</td>
+										<td>Access token</td>
+									</tr>
+									<tr>
+										<th scope="row">role</th>
+										<th scope="row">OpenId standard</th>
+										<td>This includes user's email information in the token</td>
+										<td>Access token</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<h3>/token request</h3>
+							<p>The following serialized form parameters must be provided in the request</p>
+							<div class="table-responsive my-4">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th scope="col">Name</th>
+										<th scope="col">Type</th>
+										<th scope="col">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">grant_type</th>
+										<td>String</td>
+										<td><p>This must be set to authorization_code.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">code</th>
+										<td>String</td>
+										<td><p>The authorization code received in response to the authentication request.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">code_verifier</th>
+										<td>String</td>
+										<td>
+											<p>A cryptographic string of sufficient entropy such that an attacker cannot predict or guess its value, as specified in section 4.1 of the RFC(https://tools.ietf.org/html/rfc7636). This value is used with the code_challenge_method presented in the /authorize request, to produce the value to check against the code_challenge, which is also presented at /authorize.</p>
+											<div class="callout-block callout-block-info">
+												<div class="content">
+													<h4 class="callout-title">
+												<span class="callout-icon-holder mr-1">
+													<i class="fas fa-info-circle"></i>
+												</span><!--//icon-holder-->
+														supported algorithms
+													</h4>
+													<p>Currently dispatcher supports only S256</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">redirect_uri</th>
+										<td>String</td>
+										<td><p>The redirectURI supplied in the original authentication request.</p></td>
+									</tr>
+									<tr>
+										<th scope="row">client_id</th>
+										<td>String</td>
+										<td><p>The relying party client identifier.</p></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<figure>
+								<pre>
+									<code>POST /api/dispatcher/oauth/token HTTP/2.0
+Host: auth.ebsco.zone
+Content-Type: application/x-www-form-urlencoded
+grant_type=authorization_code
+client_id=A_CLIENT_ID
+&code=SplxlOBeZQQYbYS6WxSbIA
+&code_verifier=YOUR_GENERATED_CODE_VERIFIER
+&redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
+									</code>
+								</pre>
+							</figure>
+						</section><!--//section-->
+					</header>
+				</article><!--//docs-article-->
+
+			    <article class="docs-article" id="section-9">
+				    <header class="docs-header">
+					    <h1 class="docs-heading">FAQs</h1>
+					    <section class="docs-intro">
+						    <p>Section intro goes here. You can list all your FAQs using the format below.</p>
+						</section><!--//docs-intro-->
+				    </header>
+				     <section class="docs-section" id="item-9-1">
+						<h2 class="section-heading">Section Item 9.1 <small>(FAQ Category One)</small></h2>
+						 <div id = item-faq-1>
+							 <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>What grant flows does the dispatcher support?</h5>
+							 <p>Dispatcher supports Authorization Grant Flow, Refresh Token, Client Credentials, Trusted Application (Custom) and Authorization Code Flow with Proof Key for Code Exchange (PKCE).</p>
+						 </div>
+						 <div id = faq-2>
+							 <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>What grant flows do you plan to support in the future?</h5>
+							 <p>We don't have any plans currently. We are willing to support whatever enables your team to deliver value.</p>
+						 </div>
+						 <div id = faq-3>
+							 <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Does Dispatcher support multiple redirectURI?</h5>
+							 <p>We support registering multiple redirectURI for clients. RedirectURI provided on authorize requests will be checked against this list. If one isn't provided, the configured default will be used.</p>
+						 </div>
+						 <div id = faq-4>
+							 <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>What scopes are supported?</h5>
+							 <p>We support those noted below. Custom scopes can be enabled on request.</p>
+						 </div>
+						 <div id = item-faq-5>
+							 <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Why do I need to update an admin interface?</h5>
+							 <p>There is a limitation in the WebAuth/Dispatcher integration which requires that the interface, configured in Admin UI, tell WebAuth to direct the authenticated user to the Dispatcher for token creation instead of going directly to product using Datalocker service. Any product that is integrating with the Dispatcher maintains it's contract with the dispatcher using the OpenID specification. This is only required while we are using WebAuth for user authentication.</p>
+						 </div>
+					</section><!--//section-->
+				</article><!--//docs-article-->
+			    <footer class="footer">
+			    </footer>
+		    </div>
+	    </div>
+    </div><!--//docs-wrapper-->
+
+	<section class="cta-section text-center py-5 theme-bg-dark position-relative">
+		<div class="theme-bg-shapes-right"></div>
+		<div class="theme-bg-shapes-left"></div>
+		<div class="container">
+			<h3 class="mb-2 text-white mb-3">EBSCO Dispatcher</h3>
+		</div>
+	</section><!--//cta-section-->
+
+	<footer class="footer">
+
+		<div class="footer-bottom text-center py-5">
+			<ul class="social-list list-unstyled pb-4 mb-0">
+				<li class="list-inline-item"><a href="https://github.com/EBSCOIS/resourcemanagement.shared.dispatcher"><i class="fab fa-github fa-fw"></i></a></li>
+			</ul><!--//social-list-->
+		</div>
+	</footer>
+
+
+	<script type="text/javascript">
+		var jsonArray = [{}]
+		Array.from(
+				document.querySelectorAll("[id^='gr-ty']"))
+				.forEach(function (x) {
+							jsonArray.push({id:x.id, title: x.id, href:'docs-page.html#'+x.id, content:x.getElementsByTagName('p')[0].innerHTML});
+						}
+				);
+
+		console.log(JSON.stringify(jsonArray));
+	</script>
+
+
+    <!-- Javascript -->
+    <script src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script>
+    <script src="assets/plugins/jquery.scrollTo.min.js"></script>
+    <script src="assets/plugins/lightbox/dist/ekko-lightbox.min.js"></script>
+    <script src="assets/js/docs.js"></script>
+
+</body>
+</html>

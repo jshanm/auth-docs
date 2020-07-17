@@ -1,0 +1,313 @@
+<html lang="en">
+<head>
+    <title>Dispacther - Documentation</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dispatcher documentation for client teams">
+    <meta name="author" content="Jay Shan">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+</head>
+
+<body>
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon mr-2" src="assets/images/ebsco-logo.svg" alt="logo"><span class="logo-text">Auth<span class="text-alt">Docs</span></span></a></div>
+                </div><!--//docs-logo-wrapper-->
+	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+
+					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+						<li class="list-inline-item"><a href="https://github.com/EBSCOIS/resourcemanagement.shared.dispatcher"><i class="fab fa-github fa-fw"></i></a></li>
+		            </ul><!--//social-list-->
+	            </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+
+
+    <div class="page-header theme-bg-dark py-5 text-center position-relative">
+	    <div class="theme-bg-shapes-right"></div>
+	    <div class="theme-bg-shapes-left"></div>
+	    <div class="container">
+		    <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
+		    <div class="page-intro single-col-max mx-auto">Documentation to utilize Auth using Dispatcher</div>
+		    <div class="main-search-box pt-3 d-block mx-auto">
+                 <form class="search-form w-100">
+		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+		        </form>
+             </div>
+	    </div>
+    </div><!--//page-header-->
+    <div class="page-content">
+	    <div class="container">
+		    <div class="docs-overview py-5">
+			    <div class="row justify-content-center">
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-map-signs"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">Grant Type Decision</span>
+								</h5>
+								<div class="card-text">
+									Help you to choose which OAuth2 grant type to use..
+								</div>
+								<a class="card-link-mask" href="grant-types.html#grant-type"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-cogs fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Client Credentials</span>
+							    </h5>
+							    <div class="card-text">
+								    Machine-to-machine request for token. Produces a access token for a service to access another service/api.
+							    </div>
+							    <a class="card-link-mask" href="grant-types.html#gr-ty-client_creds"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-map-signs"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">Trusted Application</span>
+								</h5>
+								<div class="card-text">
+									Machine-to-machine request for token. Produces a access and id token for the user without user authenticating through Dispatcher.
+								</div>
+								<a class="card-link-mask" href="grant-types.html#gr-ty-trusted-app"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-laptop-code"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">Authorization Code</span>
+								</h5>
+								<div class="card-text">
+									Grant type is used by confidential and public clients to exchange an authorization code for an access token.
+								</div>
+								<a class="card-link-mask" href="grant-types.html#gr-ty-auth-code"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-tablet-alt"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">PKCE</span>
+								</h5>
+								<div class="card-text">
+									Authorization Code grant flow for Mobile and Single-Page-Applications
+								</div>
+								<a class="card-link-mask" href="grant-types.html#gr-ty-pkce"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-box fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">API Registration</span>
+							    </h5>
+							    <div class="card-text">
+								    How to register an API
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-3"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-cogs fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Client Registration</span>
+							    </h5>
+							    <div class="card-text">
+								    How to register a client.
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-4"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-cogs fa-fw"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">External Client Registration</span>
+								</h5>
+								<div class="card-text">
+									How to register an external client.
+								</div>
+								<a class="card-link-mask" href="grant-types.html#section-4"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-tools"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">JWKS endpoint</span>
+							    </h5>
+							    <div class="card-text">
+								    Token Verification
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-5"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-laptop-code"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Introspection</span>
+							    </h5>
+							    <div class="card-text">
+								    How to introspect your token
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-6"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-laptop-code"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">Login Branding</span>
+								</h5>
+								<div class="card-text">
+									Branding
+								</div>
+								<a class="card-link-mask" href="grant-types.html#section-6"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+					<div class="col-12 col-lg-4 py-3">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-laptop-code"></i>
+							        </span><!--//card-icon-holder-->
+									<span class="card-title-text">Logout</span>
+								</h5>
+								<div class="card-text">
+									Logout
+								</div>
+								<a class="card-link-mask" href="grant-types.html#section-6"></a>
+							</div><!--//card-body-->
+						</div><!--//card-->
+					</div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-book-reader"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">Resources</span>
+							    </h5>
+							    <div class="card-text">
+								    RFC
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-8"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+				    <div class="col-12 col-lg-4 py-3">
+					    <div class="card shadow-sm">
+						    <div class="card-body">
+							    <h5 class="card-title mb-3">
+								    <span class="theme-icon-holder card-icon-holder mr-2">
+								        <i class="fas fa-lightbulb"></i>
+							        </span><!--//card-icon-holder-->
+							        <span class="card-title-text">FAQs</span>
+							    </h5>
+							    <div class="card-text">
+								    Frequently asked question
+								</div>
+							    <a class="card-link-mask" href="grant-types.html#section-9"></a>
+						    </div><!--//card-body-->
+					    </div><!--//card-->
+				    </div><!--//col-->
+			    </div><!--//row-->
+		    </div><!--//container-->
+		</div><!--//container-->
+    </div><!--//page-content-->
+
+    <section class="cta-section text-center py-5 theme-bg-dark position-relative">
+	    <div class="theme-bg-shapes-right"></div>
+	    <div class="theme-bg-shapes-left"></div>
+	    <div class="container">
+		    <h3 class="mb-2 text-white mb-3">EBSCO Dispatcher</h3>
+	    </div>
+    </section><!--//cta-section-->
+
+    <footer class="footer">
+
+	    <div class="footer-bottom text-center py-5">
+		    <ul class="social-list list-unstyled pb-4 mb-0">
+			    <li class="list-inline-item"><a href="https://github.com/EBSCOIS/resourcemanagement.shared.dispatcher"><i class="fab fa-github fa-fw"></i></a></li>
+	        </ul><!--//social-list-->
+	    </div>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
